@@ -100,7 +100,7 @@ class EcogazSync extends eqLogic {
               else
               {
                 $jourJ=$today->diff($jour)->format("%a");
-                if ($jourJ >= $today)
+                if ($jour >= $today)
                 {
                   log::add('EcogazSync', 'debug', 'Jour J+'.$jourJ);
                   $eqLogic->checkAndUpdateCmd('date J+'.$jourJ, $record->fields->gas_day);
