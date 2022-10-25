@@ -1,7 +1,7 @@
 # 0.1
 
 - First version
-- API EcoWatt
+- API EcoGaz
 
 
 > Detailed changelog :

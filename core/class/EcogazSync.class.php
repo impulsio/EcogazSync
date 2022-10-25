@@ -100,10 +100,13 @@ class EcogazSync extends eqLogic {
               else
               {
                 $jourJ=$today->diff($jour)->format("%a");
-                log::add('EcogazSync', 'debug', 'Jour J+'.$jourJ);
-                $eqLogic->checkAndUpdateCmd('date J+'.$jourJ, $record->fields->gas_day);
-                $eqLogic->checkAndUpdateCmd('valeur J+'.$jourJ, $record->fields->indice_de_couleur);
-                $eqLogic->save();
+                if ($jourJ >= $today)
+                {
+                  log::add('EcogazSync', 'debug', 'Jour J+'.$jourJ);
+                  $eqLogic->checkAndUpdateCmd('date J+'.$jourJ, $record->fields->gas_day);
+                  $eqLogic->checkAndUpdateCmd('valeur J+'.$jourJ, $record->fields->indice_de_couleur);
+                  $eqLogic->save();
+                }
               }
             }
           }
@@ -135,7 +138,7 @@ class EcogazSync extends eqLogic {
         $cmd->save();
       }
       $order=0;
-      for ($i = 0; $i <= 5; $i++)
+      for ($i = 0; $i <= 4; $i++)
       {
         $order++;
         $cmd = $this->getCmd(null, 'date J+'.$i);
@@ -210,7 +213,7 @@ class EcogazSync extends eqLogic {
       log::add('EcogazSync','debug','Récupérations des valeurs');
       $jourFR=array('1'=>'Lundi','2'=>'Mardi','3'=>'Mercredi','4'=>'Jeudi','5'=>'Vendredi','6'=>'Samedi','7'=>'Dimanche');
       $moisFR=array('1'=>'Jan.','2'=>'Fev.','3'=>'Mars','4'=>'Avril','5'=>'Mai','6'=>'Juin','7'=>'Juil.','8'=>'Août','9'=>'Sept.','10'=>'Oct.','11'=>'Nov.','12'=>'Déc.');
-      for ($i = 0; $i <= 5; $i++)
+      for ($i = 0; $i <= 4; $i++)
       {
         $cmd = $this->getCmd(null, 'date J+'.$i);
         $replace['#dateJ'.$i.'#'] = is_object($cmd) ? $cmd->execCmd() : '';
@@ -236,15 +239,23 @@ class EcogazSync extends eqLogic {
           $replace['#valeurJ'.$i.'#'] = $value;
           if ($value=='1')
           {
-            $replace['#imageJ'.$i.'#'] = 'courbe-signal-green.png';
+            $replace['#iconJ'.$i.'#'] = 'fas fa-check-circle';
+            $replace['#colorJ'.$i.'#'] = 'green';
           }
-          else if ($value)
+          else if ($value=='2')
           {
-            $replace['#imageJ'.$i.'#'] = 'courbe-signal-orange.png';
+            $replace['#iconJ'.$i.'#'] = 'fas fa-info-circle';
+            $replace['#colorJ'.$i.'#'] = 'yellow';
           }
-          else if ($value)
+          else if ($value=='3')
           {
-            $replace['#imageJ'.$i.'#'] = 'courbe-signal-red.png';
+            $replace['#iconJ'.$i.'#'] = 'fas fa-exclamation-circle';
+            $replace['#colorJ'.$i.'#'] = 'orange';
+          }
+          else if ($value=='4')
+          {
+            $replace['#iconJ'.$i.'#'] = 'fas fa-times-circle';
+            $replace['#colorJ'.$i.'#'] = 'red';
           }
         }
         else
