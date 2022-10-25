@@ -1,7 +1,7 @@
-Plugin jeedom Sync
+Plugin Jeedom Sync
 ========================
 <img src="docs/images/EcogazSync_icon.png" width="150" />
-Plugin jeedom permettant de s'interfacer avec l'API .
+Plugin Jeedom permettant de s'interfacer avec l'API de [Ecogaz](https://myecogaz.com/).
 
 # Documentation complète:
 

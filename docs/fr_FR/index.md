@@ -16,7 +16,7 @@ a. Installation
 - Télécharger le plugin
 
 - Activer le plugin
-Pour cela il s'uffit d'aller dans la Gestion des plugin et de cliquer sur l'icône "EcogazSync" puis sur "Activer"
+Pour cela il suffit d'aller dans la Gestion des plugin et de cliquer sur l'icône "EcogazSync" puis sur "Activer"
 ![Activer](../images/activer.png)
 
 - Explication du cronHourly
